@@ -29,7 +29,10 @@ def detectPlatforms() {
     }
 
     try {
-        sh "git fetch origin ${env.CHANGE_TARGET} --quiet"
+        withCredentials([usernamePassword(credentialsId: 'github-app',
+                usernameVariable: 'GH_APP', passwordVariable: 'GH_TOKEN')]) {
+            sh "git fetch https://\$GH_APP:\$GH_TOKEN@github.com/${GITHUB_OWNER}/${GITHUB_REPO}.git ${env.CHANGE_TARGET}:refs/remotes/origin/${env.CHANGE_TARGET} --quiet"
+        }
         def changedFiles = sh(
             script: "git diff --name-only origin/${env.CHANGE_TARGET}...HEAD",
             returnStdout: true
