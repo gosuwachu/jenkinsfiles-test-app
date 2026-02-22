@@ -3,6 +3,7 @@
 // Re-run pipeline with SKIP_* parameters to resume from a point
 //1
 def runStageWithCheck(String checkName, Closure body) {
+    checkName = "${checkName} (3-MB)"
     publishChecks name: checkName, status: 'IN_PROGRESS', summary: "Running ${checkName}..."
     try {
         body()
@@ -47,6 +48,7 @@ pipeline {
                     ]
                     skipMap.each { paramName, checkName ->
                         if (params[paramName]) {
+                            checkName = "${checkName} (3-MB)"
                             publishChecks name: checkName, status: 'COMPLETED',
                                 conclusion: 'NEUTRAL', summary: "${checkName} skipped"
                         }

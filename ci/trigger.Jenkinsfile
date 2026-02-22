@@ -2,6 +2,7 @@
 // Publishes per-stage GitHub Checks and passes BRANCH_NAME to child jobs
 
 def runWithCheck(String checkName, String jobPath, String branch) {
+    checkName = "${checkName} (4A-MB)"
     publishChecks name: checkName, status: 'IN_PROGRESS', summary: "Running ${checkName}..."
     try {
         build job: jobPath,
