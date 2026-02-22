@@ -2,11 +2,13 @@
 // Publishes per-stage GitHub Checks and passes BRANCH_NAME to child jobs
 // Smart re-run: detects GitHub Check re-run and skips already-passed child jobs
 
-GITHUB_OWNER = 'gosuwachu'
-GITHUB_REPO = 'jenkinsfiles-test-app'
-CHECK_SUFFIX = '(4A-MB)'
+import groovy.transform.Field
 
-STAGE_NAMES = [
+@Field GITHUB_OWNER = 'gosuwachu'
+@Field GITHUB_REPO = 'jenkinsfiles-test-app'
+@Field CHECK_SUFFIX = '(4A-MB)'
+
+@Field STAGE_NAMES = [
     'iOS Build', 'Android Build', 'iOS Tests', 'Android Tests',
     'iOS Lint', 'Android Lint', 'iOS Deploy', 'Android Deploy',
 ]
