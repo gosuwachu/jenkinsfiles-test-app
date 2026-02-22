@@ -2,11 +2,11 @@
 // Publishes per-stage GitHub Checks and passes BRANCH_NAME to child jobs
 // Smart re-run: detects GitHub Check re-run and skips already-passed child jobs
 
-def GITHUB_OWNER = 'gosuwachu'
-def GITHUB_REPO = 'jenkinsfiles-test-app'
-def CHECK_SUFFIX = '(4A-MB)'
+GITHUB_OWNER = 'gosuwachu'
+GITHUB_REPO = 'jenkinsfiles-test-app'
+CHECK_SUFFIX = '(4A-MB)'
 
-def STAGE_NAMES = [
+STAGE_NAMES = [
     'iOS Build', 'Android Build', 'iOS Tests', 'Android Tests',
     'iOS Lint', 'Android Lint', 'iOS Deploy', 'Android Deploy',
 ]

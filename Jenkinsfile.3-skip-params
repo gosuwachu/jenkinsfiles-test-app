@@ -2,12 +2,12 @@
 // Publishes per-stage GitHub Checks for PR visibility
 // Smart re-run: detects GitHub Check re-run and skips already-passed stages
 //
-def GITHUB_OWNER = 'gosuwachu'
-def GITHUB_REPO = 'jenkinsfiles-test-app'
-def CHECK_SUFFIX = '(3-MB)'
+GITHUB_OWNER = 'gosuwachu'
+GITHUB_REPO = 'jenkinsfiles-test-app'
+CHECK_SUFFIX = '(3-MB)'
 
 // Maps stage display names to their SKIP_* parameter names
-def STAGE_TO_PARAM = [
+STAGE_TO_PARAM = [
     'iOS Build':      'SKIP_IOS_BUILD',
     'Android Build':  'SKIP_ANDROID_BUILD',
     'iOS Tests':      'SKIP_IOS_TESTS',
