@@ -1,7 +1,7 @@
 // Option 3-MB: Parameterized Skip - Single Jenkinsfile with skip parameters
 // Publishes per-stage GitHub Checks for PR visibility
 // Re-run pipeline with SKIP_* parameters to resume from a point
-
+//1
 def runStageWithCheck(String checkName, Closure body) {
     publishChecks name: checkName, status: 'IN_PROGRESS', summary: "Running ${checkName}..."
     try {
