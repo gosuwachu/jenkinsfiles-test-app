@@ -1,8 +1,10 @@
 // iOS UI Tests — triggered by PR comment "run-ios-ui-tests"
 // Publishes own GitHub commit status
 
-def GITHUB_OWNER = 'gosuwachu'
-def GITHUB_REPO = 'jenkinsfiles-test-app'
+import groovy.transform.Field
+
+@Field GITHUB_OWNER = 'gosuwachu'
+@Field GITHUB_REPO = 'jenkinsfiles-test-app'
 
 def setGitHubStatus(String sha, String context, String state, String description) {
     withCredentials([usernamePassword(credentialsId: 'github-app',
