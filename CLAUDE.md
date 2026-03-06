@@ -1,0 +1,61 @@
+# App Repo (jenkinsfiles-test-app)
+
+Mobile app repository for the Jenkins CI/CD test environment. Contains the orchestrator pipeline and platform source directories.
+
+## Project Structure
+
+```
+├── ci/
+│   └── trigger.Jenkinsfile          # Orchestrator pipeline (multibranch)
+├── ios/                             # iOS source directory (placeholder)
+└── android/                         # Android source directory (placeholder)
+```
+
+## How It Works
+
+The Jenkins multibranch pipeline (`pipeline/trigger`) discovers branches and PRs in this repo and runs `ci/trigger.Jenkinsfile`.
+
+The trigger orchestrator:
+1. Checks if the PR author is a collaborator (blocks non-collaborators without approved reviews)
+2. Detects which platforms changed (compares PR diff against `ios/` and `android/` directories)
+3. Publishes "skipped" statuses for unchanged platforms
+4. Triggers child jobs in parallel via the omnibus job (`pipeline/omnibus`), passing:
+   - `BRANCH_NAME` — the branch to build
+   - `COMMIT_SHA` — pinned to `env.GIT_COMMIT` so all child jobs use the same commit
+   - `JENKINSFILE` — path to the child Jenkinsfile in the CI repo
+
+### Pipeline Stages
+
+```
+Start (collaborator check + platform detection)
+  → Build & Quality (parallel: iOS/Android build, tests, lint)
+    → Deploy (parallel: iOS/Android deploy)
+```
+
+### Commit Status Contexts
+
+| Platform | Contexts |
+|----------|----------|
+| iOS | `ci/ios-build`, `ci/ios-unit-tests`, `ci/ios-linter`, `ci/ios-deploy` |
+| Android | `ci/android-build`, `ci/android-unit-tests`, `ci/android-linter`, `ci/android-deploy` |
+| Comment-triggered | `ci/ios-ui-tests` |
+
+## Modifying the Trigger
+
+Edit `ci/trigger.Jenkinsfile`, push to this repo, and re-run the multibranch scan or wait for the next build. The trigger runs from the app repo's branch, not from `main` of the CI repo.
+
+Key sections in `trigger.Jenkinsfile`:
+- `IOS_CONTEXTS` / `ANDROID_CONTEXTS` — lists of commit status context names
+- `checkCollaborator()` — GitHub API call to verify PR author
+- `detectPlatforms()` — git diff against target branch to determine iOS/Android changes
+- `publishSkippedStatuses()` — marks skipped platforms as "success" with "Skipped" description
+
+## Credentials
+
+- `github-app` — used via `withCredentials` for GitHub API calls (collaborator checks, skipped statuses)
+- `github-pat` — used by Jenkins SCM for checkout (avoids github-checks plugin auto-publishing)
+
+## Companion Repos
+
+- [jenkinsfiles-test](https://github.com/gosuwachu/jenkinsfiles-test) — Jenkins Docker environment, Job DSL, seed job
+- [jenkinsfiles-test-app-ci](https://github.com/gosuwachu/jenkinsfiles-test-app-ci) — child Jenkinsfiles and Python CI CLI
