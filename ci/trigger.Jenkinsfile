@@ -180,7 +180,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios-build.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-build.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -191,7 +191,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/android-build.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-build.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -202,7 +202,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios-unit-tests.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-unit-tests.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -213,7 +213,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/android-unit-tests.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-unit-tests.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -224,7 +224,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios-linter.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-linter.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -235,7 +235,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/android-linter.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-linter.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -251,7 +251,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios-deploy.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-deploy.Jenkinsfile')
                               ],
                               wait: true
                     }
@@ -262,7 +262,7 @@ pipeline {
                         build job: 'pipeline/omnibus',
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
-                                  string(name: 'JENKINSFILE', value: 'ci/android-deploy.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-deploy.Jenkinsfile')
                               ],
                               wait: true
                     }
