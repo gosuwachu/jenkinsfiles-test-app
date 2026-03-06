@@ -177,48 +177,66 @@ pipeline {
                 stage('iOS Build') {
                     when { expression { env.RUN_IOS == 'true' } }
                     steps {
-                        build job: 'pipeline/ios-build',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/ios-build.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('Android Build') {
                     when { expression { env.RUN_ANDROID == 'true' } }
                     steps {
-                        build job: 'pipeline/android-build',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/android-build.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('iOS Tests') {
                     when { expression { env.RUN_IOS == 'true' } }
                     steps {
-                        build job: 'pipeline/ios-unit-tests',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/ios-unit-tests.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('Android Tests') {
                     when { expression { env.RUN_ANDROID == 'true' } }
                     steps {
-                        build job: 'pipeline/android-unit-tests',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/android-unit-tests.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('iOS Lint') {
                     when { expression { env.RUN_IOS == 'true' } }
                     steps {
-                        build job: 'pipeline/ios-linter',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/ios-linter.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('Android Lint') {
                     when { expression { env.RUN_ANDROID == 'true' } }
                     steps {
-                        build job: 'pipeline/android-linter',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/android-linter.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
@@ -230,16 +248,22 @@ pipeline {
                 stage('iOS Deploy') {
                     when { expression { env.RUN_IOS == 'true' } }
                     steps {
-                        build job: 'pipeline/ios-deploy',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/ios-deploy.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
                 stage('Android Deploy') {
                     when { expression { env.RUN_ANDROID == 'true' } }
                     steps {
-                        build job: 'pipeline/android-deploy',
-                              parameters: [string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD)],
+                        build job: 'pipeline/omnibus',
+                              parameters: [
+                                  string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
+                                  string(name: 'JENKINSFILE', value: 'ci/android-deploy.Jenkinsfile')
+                              ],
                               wait: true
                     }
                 }
