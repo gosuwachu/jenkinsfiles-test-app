@@ -31,7 +31,8 @@ The trigger orchestrator:
 ```
 Start (collaborator check + platform detection)
   → Build & Quality (parallel: iOS/Android build, tests, lint)
-    → Deploy (parallel: iOS/Android deploy)
+      Build jobs trigger their corresponding deploy jobs directly via omnibus,
+      passing CONTEXT_JSON (structured JSON from the build step's stdout)
 ```
 
 ### Commit Status Contexts
