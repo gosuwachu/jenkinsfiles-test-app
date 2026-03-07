@@ -144,6 +144,10 @@ def publishSkippedStatuses(List<String> contexts, String platform) {
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'CI_BRANCH', defaultValue: 'main', description: 'CI repo branch to checkout Jenkinsfiles from')
+    }
+
     environment {
         BRANCH_TO_BUILD = "${env.CHANGE_BRANCH ?: env.BRANCH_NAME}"
     }
@@ -181,7 +185,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-build.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-build.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -193,7 +198,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/android/android-build.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-build.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -205,7 +211,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-unit-tests.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-unit-tests.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -217,7 +224,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/android/android-unit-tests.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-unit-tests.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -229,7 +237,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-linter.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-linter.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -241,7 +250,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/android/android-linter.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-linter.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -258,7 +268,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-deploy.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/ios/ios-deploy.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }
@@ -270,7 +281,8 @@ pipeline {
                               parameters: [
                                   string(name: 'BRANCH_NAME', value: env.BRANCH_TO_BUILD),
                                   string(name: 'COMMIT_SHA', value: env.GIT_COMMIT),
-                                  string(name: 'JENKINSFILE', value: 'ci/android/android-deploy.Jenkinsfile')
+                                  string(name: 'JENKINSFILE', value: 'ci/android/android-deploy.Jenkinsfile'),
+                                  string(name: 'CI_BRANCH', value: params.CI_BRANCH)
                               ],
                               wait: true
                     }

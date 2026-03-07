@@ -23,6 +23,7 @@ The trigger orchestrator:
    - `BRANCH_NAME` — the branch to build
    - `COMMIT_SHA` — pinned to `env.GIT_COMMIT` so all child jobs use the same commit
    - `JENKINSFILE` — path to the child Jenkinsfile in the CI repo
+   - `CI_BRANCH` — CI repo branch to checkout Jenkinsfiles from (defaults to `main`, configurable via pipeline parameter)
 
 ### Pipeline Stages
 
